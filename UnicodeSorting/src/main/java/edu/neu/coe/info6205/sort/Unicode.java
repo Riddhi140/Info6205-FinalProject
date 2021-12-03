@@ -1,5 +1,6 @@
 package edu.neu.coe.info6205.sort;
 
+import edu.neu.coe.info6205.huskySortUtils.HuskyCoderFactory;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
 import edu.neu.coe.info6205.util.FileUtil;
 
@@ -57,6 +58,10 @@ public class Unicode {
         TimSort timSort = new TimSort();
         Consumer<List<String>> listConsumer = (x) -> timSort.sort(sortInput, 0, sortInput.length);
         computeBenchMark(supplier, sortInput, listConsumer, "TimSort" + "- Randomly Ordered");
+
+        MergeHuskySort huskySort =  new MergeHuskySort<>(HuskyCoderFactory.asciiCoder);
+        Consumer<List<String>> huskySortConsumer = (x) -> huskySort.sort(sortInput);
+        computeBenchMark(supplier, sortInput, huskySortConsumer, "Husky Sort" + "- Randomly Ordered");
     }
 
     private static void computeBenchMark(Supplier<List<String>> supplier, String[] sortInput, Consumer listConsumer, String description) {

@@ -1,18 +1,18 @@
 package edu.neu.coe.info6205;
 
-import edu.neu.coe.info6205.sort.TimSort;
+
+import edu.neu.coe.info6205.huskySortUtils.HuskyCoderFactory;
+import edu.neu.coe.info6205.sort.MergeHuskySort;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
 
-public class TimSortTest {
-
-
+public class HuskySortTest {
     @Test
     public void testHindiSort() throws Exception{
         String[] xs = new String[]{"कम", "केम","काम","कूम", "कुम"};
-        TimSort timSortTest =  new TimSort();
-        timSortTest.sort(xs, 0, xs.length);
+        MergeHuskySort huskySort =  new MergeHuskySort<>(HuskyCoderFactory.asciiCoder);
+        huskySort.sort(xs);
         assertEquals("कम", xs[0]);
         assertEquals("काम", xs[1]);
         assertEquals("कुम", xs[2]);
