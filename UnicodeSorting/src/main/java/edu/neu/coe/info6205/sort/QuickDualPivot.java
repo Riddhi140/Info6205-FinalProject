@@ -9,10 +9,12 @@ public class QuickDualPivot {
         StdRandom.shuffle(a);
         sort(a, 0, a.length - 1);
         assert isSorted(a);
+//        System.out.println("Dual Pivot Quick Sort...Done!");
+
     }
 
     // quicksort the subarray a[lo .. hi] using dual-pivot quicksort
-    private static void sort(Comparable[] a, int lo, int hi) {
+    public static void sort(Comparable[] a, int lo, int hi) {
         if (hi <= lo) return;
 
         // make sure a[lo] <= a[hi]

@@ -16,19 +16,19 @@ public class MSD {
     }
 
     public static void sort(String[] a) {
-        System.out.println("MSDStringSort...Start");
+//        System.out.println("MSDStringSort...Start");
         int N = a.length;
         R = a.length;
         aux = new String[N];
         sort(a, 0, N - 1, 0);
-        System.out.println("MSDStringSort...Done!");
+//        System.out.println("MSDStringSort...Done!");
 
     }
 
     private static void sort(String[] a, int lo, int hi, int d) { // Sort from a[lo] to a[hi], starting at the dth
         // character.
         if (hi <= lo + M) {
-            Insertion.sort(a, lo, hi, d);
+            QuickDualPivot.sort(a, lo, hi);
             return;
 
         }

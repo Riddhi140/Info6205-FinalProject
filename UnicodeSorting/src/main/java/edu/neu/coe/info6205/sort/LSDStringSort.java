@@ -88,9 +88,9 @@ public class LSDStringSort {
      * @return void
      */
     public static void sort(String[] strArr) {
-        System.out.println("LSDStringSort...Start");
+//        System.out.println("LSDStringSort...Start");
         ASCII_RANGE = strArr.length;
         sort(strArr, 0, strArr.length - 1);
-        System.out.println("LSDStringSort...Done!");
+//        System.out.println("LSDStringSort...Done!");
     }
 }
