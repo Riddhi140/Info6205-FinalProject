@@ -1,4 +1,4 @@
-package edu.neu.coe.info6205;
+package edu.neu.coe.info6205.sort;
 
 import edu.neu.coe.info6205.sort.TimSort;
 import org.junit.Test;
