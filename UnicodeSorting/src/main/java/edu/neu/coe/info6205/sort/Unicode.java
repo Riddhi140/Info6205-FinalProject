@@ -53,28 +53,28 @@ public class Unicode {
 //        computeBenchMark(supplier, msdSort, "MSDStringSort" + "- Randomly Ordered");
 
         //Dual Pivot Quick Sort Benchmark
-//        Consumer<List<String>> quickDualPivotConsumer = (x) -> QuickDualPivot.sort(sortInput);
-//        Unicode.sort(words, quickDualPivotConsumer, "Order Situation - Randomly Ordered - " + "QuickSort");
+        Consumer<List<String>> quickDualPivotConsumer = (x) -> QuickDualPivot.sort(sortInput);
+        Unicode.sort(words, quickDualPivotConsumer, "Order Situation - Randomly Ordered - " + "QuickSort");
 //
 ////        computeBenchMark(supplier, sortInput, quickDualPivotConsumer, "QuickDualPivot" + "- Randomly Ordered");
 ////
 ////        //Tim Sort Benchmark
 //        TimSort timSort = new TimSort();
-//        Consumer<List<String>> listConsumer = (x) -> timSort.sort(sortInput, 0, sortInput.length);
-//        Unicode.sort(words, listConsumer, "Order Situation - Randomly Ordered - " + "TimSort");
+        Consumer<List<String>> listConsumer = (x) -> timSort.sort(sortInput, 0, sortInput.length);
+        Unicode.sort(words, listConsumer, "Order Situation - Randomly Ordered - " + "TimSort");
 ////        computeBenchMark(supplier, sortInput, listConsumer, "TimSort" + "- Randomly Ordered");
 ////
 ////
 ////        //LSDStringSort BenchMark
-//        Consumer<List<String>> lsdTimer = (x) -> LSDStringSort.sort(sortInput);
-//        Unicode.sort(words, lsdTimer, "Order Situation - Randomly Ordered - " + "LSDStringSort");
+        Consumer<List<String>> lsdTimer = (x) -> LSDStringSort.sort(sortInput);
+        Unicode.sort(words, lsdTimer, "Order Situation - Randomly Ordered - " + "LSDStringSort");
 //
 ////        computeBenchMark(supplier, sortInput, lsdTimer, "LSDStringSort" + "- Randomly Ordered");
 ////
 ////        //HuskySort Benchmark
-//        MergeHuskySort huskySort =  new MergeHuskySort<>(HuskyCoderFactory.asciiCoder);
-//        Consumer<List<String>> huskySortConsumer = (x) -> huskySort.sort(sortInput);
-//        Unicode.sort(words, huskySortConsumer, "Order Situation - Randomly Ordered - " + "HuskySort");
+        MergeHuskySort huskySort =  new MergeHuskySort<>(HuskyCoderFactory.asciiCoder);
+        Consumer<List<String>> huskySortConsumer = (x) -> huskySort.sort(sortInput);
+        Unicode.sort(words, huskySortConsumer, "Order Situation - Randomly Ordered - " + "HuskySort");
 
 //        computeBenchMark(supplier, sortInput, huskySortConsumer, "Husky Sort" + "- Randomly Ordered");
 
