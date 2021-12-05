@@ -5,9 +5,10 @@ import edu.neu.coe.info6205.sort.*;
 import edu.neu.coe.info6205.util.Benchmark_Timer;
 import edu.neu.coe.info6205.util.FileUtil;
 
-import java.io.*;
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -16,166 +17,99 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 public class BenchMarkAnalysis {
-    static NumberFormat formatter = new DecimalFormat("#0.00000");
 
-    public static void main(String[] args) throws IOException {
-        msdSortAnalysis();
-        lsdSortAnalysis();
+    public static void main(String[] args) {
         huskySortAnalysis();
         dualQuickSortAnalysis();
         timSortAnalysis();
+        msdSortAnalysis();
+        lsdSortAnalysis();
     }
 
-    private static void msdSortAnalysis() throws FileNotFoundException {
-        List<String> words = new ArrayList<>();
-        for (int i = 1; i < 3; i++) {
-            long start1 = System.currentTimeMillis();
-            words = hindiWordsList("4MHindiWords.csv");
+    /**
+     * To
+     */
+    private static void msdSortAnalysis() {
+        List<String> words = hindiWordsList("4MHindiWords.csv");
+        for (int i = 1; i < 4; i++) {
             if (i > 1) {
                 words.addAll(Collections.unmodifiableList(words));
             }
-            System.out.println("Sorting for array length" + words.size());
-            long end1 = System.currentTimeMillis();
-            System.out.println("Execution time for creating list from file is " + formatter.format((end1 - start1) / 1000d) + " seconds");
-
-            long start2 = System.currentTimeMillis();
-
             Supplier<List<String>> supplier = getListSupplier(words);
-            long end2 = System.currentTimeMillis();
-
-            System.out.println("Execution time for shuffling list from file is " + formatter.format((end2 - start2) / 1000d) + " seconds");
-
-            long start = System.currentTimeMillis();
             exeMSDStringSort(supplier, supplier.get().toArray(new String[0]));
-            long end = System.currentTimeMillis();
-
-            NumberFormat formatter = new DecimalFormat("#0.00000");
-            System.out.println("Execution time for msd sort is " + formatter.format((end - start) / 1000d) + " seconds");
         }
         words.clear();
     }
 
-    private static void dualQuickSortAnalysis() throws FileNotFoundException {
-        List<String> words = new ArrayList<>();
-        for (int i = 1; i < 3; i++) {
-            long start1 = System.currentTimeMillis();
+    /**
+     *
+     */
+    private static void dualQuickSortAnalysis() {
+        List<String> words = hindiWordsList("4MHindiWords.csv");
+        for (int i = 1; i < 4; i++) {
+            if (i > 1) {
+                words.addAll(Collections.unmodifiableList(words));
+            }
+            Supplier<List<String>> supplier = getListSupplier(words);
+            exeDualPivotQuickSort(supplier, supplier.get().toArray(new String[0]));
+        }
+        words.clear();
+    }
+
+    /*
+
+     */
+    private static void timSortAnalysis() {
+        List<String> words = hindiWordsList("4MHindiWords.csv");
+        for (int i = 1; i < 4; i++) {
+            if (i > 1) {
+                words.addAll(Collections.unmodifiableList(words));
+            }
+            Supplier<List<String>> supplier = getListSupplier(words);
+            exeTimSort(supplier, supplier.get().toArray(new String[0]));
+        }
+        words.clear();
+    }
+
+    /**
+     * To Analyse LSD Sort for different Bulk inputs
+     */
+    private static void lsdSortAnalysis() {
+        List<String> words = hindiWordsList("4MHindiWords.csv");
+        for (int i = 1; i < 4; i++) {
             words = hindiWordsList("4MHindiWords.csv");
             if (i > 1) {
                 words.addAll(Collections.unmodifiableList(words));
             }
-            System.out.println("Sorting for array length" + words.size());
-            long end1 = System.currentTimeMillis();
-            System.out.println("Execution time for creating list from file is " + formatter.format((end1 - start1) / 1000d) + " seconds");
-
-            long start2 = System.currentTimeMillis();
-
             Supplier<List<String>> supplier = getListSupplier(words);
-            long end2 = System.currentTimeMillis();
-
-            System.out.println("Execution time for shuffling list from file is " + formatter.format((end2 - start2) / 1000d) + " seconds");
-
-            long start = System.currentTimeMillis();
-            exeDualPivotQuickSort(getListSupplier(words), supplier.get().toArray(new String[0]));
-            long end = System.currentTimeMillis();
-
-            NumberFormat formatter = new DecimalFormat("#0.00000");
-            System.out.println("Execution time for dualQuick sort is " + formatter.format((end - start) / 1000d) + " seconds");
+            exeLSDStringSort(supplier, supplier.get().toArray(new String[0]));
         }
         words.clear();
     }
 
-    private static void timSortAnalysis() throws FileNotFoundException {
-        List<String> words = new ArrayList<>();
-        for (int i = 1; i < 3; i++) {
-            long start1 = System.currentTimeMillis();
-            words = hindiWordsList("4MHindiWords.csv");
+    /**
+     * To compute benchmark for Husky Sort for 1-4M input
+     */
+    private static void huskySortAnalysis() {
+        List<String> words = hindiWordsList("4MHindiWords.csv");
+        for (int i = 1; i < 4; i++) {
             if (i > 1) {
                 words.addAll(Collections.unmodifiableList(words));
             }
-            System.out.println("Sorting for array length" + words.size());
-            long end1 = System.currentTimeMillis();
-            System.out.println("Execution time for creating list from file is " + formatter.format((end1 - start1) / 1000d) + " seconds");
-
-            long start2 = System.currentTimeMillis();
-
             Supplier<List<String>> supplier = getListSupplier(words);
-            long end2 = System.currentTimeMillis();
-
-            System.out.println("Execution time for shuffling list from file is " + formatter.format((end2 - start2) / 1000d) + " seconds");
-
-            long start = System.currentTimeMillis();
-            exeTimSort(getListSupplier(words), supplier.get().toArray(new String[0]));
-            long end = System.currentTimeMillis();
-
-            NumberFormat formatter = new DecimalFormat("#0.00000");
-            System.out.println("Execution time for tim sort is " + formatter.format((end - start) / 1000d) + " seconds");
+            exeMergeHuskySort(supplier, supplier.get().toArray(new String[0]));
         }
         words.clear();
     }
 
-
-    private static void lsdSortAnalysis() throws FileNotFoundException {
-        List<String> words = new ArrayList<>();
-        for (int i = 1; i < 3; i++) {
-            long start1 = System.currentTimeMillis();
-            words = hindiWordsList("4MHindiWords.csv");
-            if (i > 1) {
-                words.addAll(Collections.unmodifiableList(words));
-            }
-            System.out.println("Sorting for array length" + words.size());
-            long end1 = System.currentTimeMillis();
-            System.out.println("Execution time for creating list from file is " + formatter.format((end1 - start1) / 1000d) + " seconds");
-
-            long start2 = System.currentTimeMillis();
-
-            Supplier<List<String>> supplier = getListSupplier(words);
-            long end2 = System.currentTimeMillis();
-
-            System.out.println("Execution time for shuffling list from file is " + formatter.format((end2 - start2) / 1000d) + " seconds");
-
-            long start = System.currentTimeMillis();
-            exeLSDStringSort(getListSupplier(words), supplier.get().toArray(new String[0]));
-            long end = System.currentTimeMillis();
-
-            NumberFormat formatter = new DecimalFormat("#0.00000");
-            System.out.println("Execution time for lsd sort is " + formatter.format((end - start) / 1000d) + " seconds");
-        }
-        words.clear();
-    }
-
-
-    private static void huskySortAnalysis() throws FileNotFoundException {
-        List<String> words = new ArrayList<>();
-        for (int i = 1; i < 3; i++) {
-            long start1 = System.currentTimeMillis();
-            words = hindiWordsList("4MHindiWords.csv");
-            if (i > 1) {
-                words.addAll(Collections.unmodifiableList(words));
-            }
-            System.out.println("Sorting for array length" + words.size());
-            long end1 = System.currentTimeMillis();
-            System.out.println("Execution time for creating list from file is " + formatter.format((end1 - start1) / 1000d) + " seconds");
-
-            long start2 = System.currentTimeMillis();
-
-            Supplier<List<String>> supplier = getListSupplier(words);
-            long end2 = System.currentTimeMillis();
-
-            System.out.println("Execution time for shuffling list from file is " + formatter.format((end2 - start2) / 1000d) + " seconds");
-
-            long start = System.currentTimeMillis();
-            exeMergeHuskySort(getListSupplier(words), supplier.get().toArray(new String[0]));
-            long end = System.currentTimeMillis();
-
-            NumberFormat formatter = new DecimalFormat("#0.00000");
-            System.out.println("Execution time for husky sort is " + formatter.format((end - start) / 1000d) + " seconds");
-        }
-        words.clear();
-    }
-
+    /**
+     * To compute benchmark for MSD Sort for 1-4M input
+     *
+     * @param supplier
+     * @param sortInput
+     */
     private static void exeMSDStringSort(Supplier<List<String>> supplier, String[] sortInput) {
         try {
-            //MSDStringSort Benchmark
             Consumer<List<String>> msdSort = (x) -> MSD.sort(sortInput);
             computeBenchMark(supplier, sortInput, msdSort, "MSDStringSort" + "- Randomly Ordered");
         } catch (Exception e) {
@@ -183,9 +117,14 @@ public class BenchMarkAnalysis {
         }
     }
 
+    /**
+     * To compute benchmark for Dual Pivot Quick Sort for 1-4M input
+     *
+     * @param supplier
+     * @param sortInput
+     */
     private static void exeDualPivotQuickSort(Supplier<List<String>> supplier, String[] sortInput) {
         try {
-            //Dual Pivot Quick Sort Benchmark
             Consumer<List<String>> quickDualPivotConsumer = (x) -> QuickDualPivot.sort(sortInput);
             computeBenchMark(supplier, sortInput, quickDualPivotConsumer, "QuickDualPivot" + "- Randomly Ordered");
         } catch (Exception e) {
@@ -193,6 +132,10 @@ public class BenchMarkAnalysis {
         }
     }
 
+    /**
+     * @param supplier
+     * @param sortInput
+     */
     private static void exeTimSort(Supplier<List<String>> supplier, String[] sortInput) {
         try {
             //Tim Sort Benchmark
@@ -204,6 +147,10 @@ public class BenchMarkAnalysis {
         }
     }
 
+    /**
+     * @param supplier
+     * @param sortInput
+     */
     private static void exeLSDStringSort(Supplier<List<String>> supplier, String[] sortInput) {
         try {
             Consumer<List<String>> lsdTimer = (x) -> LSDStringSort.sort(sortInput);
@@ -213,6 +160,10 @@ public class BenchMarkAnalysis {
         }
     }
 
+    /**
+     * @param supplier
+     * @param sortInput
+     */
     private static void exeMergeHuskySort(Supplier<List<String>> supplier, String[] sortInput) {
         try {
             MergeHuskySort huskySort = new MergeHuskySort<>(HuskyCoderFactory.asciiCoder);
@@ -223,6 +174,10 @@ public class BenchMarkAnalysis {
         }
     }
 
+    /**
+     * @param words
+     * @return
+     */
     private static Supplier<List<String>> getListSupplier(List<String> words) {
         Supplier<List<String>> supplier = () -> {
             Collections.shuffle(words);
@@ -231,20 +186,30 @@ public class BenchMarkAnalysis {
         return supplier;
     }
 
+    /**
+     * @param supplier
+     * @param sortInput
+     * @param listConsumer
+     * @param description
+     */
     private static void computeBenchMark(Supplier<List<String>> supplier, String[] sortInput, Consumer listConsumer, String description) {
         Benchmark_Timer<List<String>> benchmarkTimer = new Benchmark_Timer<>("Benchmark Test", null, listConsumer, null);
         double sortTime = benchmarkTimer.runFromSupplier(supplier, 20);
         //   show(sortInput, description);
-        System.out.println(description + " Time Taken: " + sortTime + "ms");
+        System.out.println(description + " Time Taken: " + sortTime + "ms" + " for Array length: " + sortInput.length);
     }
 
+    /**
+     * @param fileName
+     * @return
+     */
     public static List<String> hindiWordsList(String fileName) {
         ClassLoader classLoader = FileUtil.class.getClassLoader();
         InputStream resourceAsStream = classLoader.getResourceAsStream(fileName);
 
         List<String> hindiWords = new ArrayList<>();
 
-        if(!Objects.isNull(resourceAsStream)) {
+        if (!Objects.isNull(resourceAsStream)) {
             try (BufferedReader br = new BufferedReader(new InputStreamReader(resourceAsStream))) {
 
                 String line = br.readLine();
