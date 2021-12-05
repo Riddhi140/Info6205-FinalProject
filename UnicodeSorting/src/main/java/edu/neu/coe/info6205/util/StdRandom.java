@@ -1,4 +1,4 @@
-package edu.neu.coe.info6205.sort;
+package edu.neu.coe.info6205.util;
 
 
 import java.util.Random;

@@ -13,6 +13,7 @@ import java.util.Arrays;
  */
 public class MergeHuskySort<X extends Comparable<X>> {
 
+    /*
     public static void main(final String[] args) {
 
         final int N = 50000;
@@ -29,7 +30,7 @@ public class MergeHuskySort<X extends Comparable<X>> {
                 // This should take about 2 minutes
                 sorter.sort(HuskySortHelper.generateRandomAlphaBetaArray(N, 4, 9));
         logger.info("Finished");
-    }
+    }*/
 
     /**
      * The main sort method.
