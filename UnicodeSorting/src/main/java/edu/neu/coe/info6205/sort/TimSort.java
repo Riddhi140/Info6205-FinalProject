@@ -44,6 +44,8 @@ public class TimSort<X extends Comparable<X>> extends SortWithHelper<X> {
 
     public void sort(X[] xs, int from, int to) {
         Arrays.sort(xs, from, to);
+//        System.out.println("Tim Sort...Done!");
+
     }
 
     public static final String DESCRIPTION = "Timsort";

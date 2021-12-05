@@ -50,7 +50,7 @@ public class MergeHuskySort<X extends Comparable<X>> {
         final X[] xsCopy = Arrays.copyOf(xs, n);
         final long[] longsCopy = Arrays.copyOf(longs, n);
         mergeSort(longsCopy, xsCopy, longs, xs, 0, n);
-
+//        System.out.println("HuskySort...Done!");
         // NOTE: Second pass (if required) to fix any remaining inversions.
         if (coding.perfect)
             return;
