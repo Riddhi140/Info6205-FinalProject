@@ -59,7 +59,7 @@ public class Unicode {
 ////        computeBenchMark(supplier, sortInput, quickDualPivotConsumer, "QuickDualPivot" + "- Randomly Ordered");
 ////
 ////        //Tim Sort Benchmark
-//        TimSort timSort = new TimSort();
+       TimSort timSort = new TimSort();
         Consumer<List<String>> listConsumer = (x) -> timSort.sort(sortInput, 0, sortInput.length);
         Unicode.sort(words, listConsumer, "Order Situation - Randomly Ordered - " + "TimSort");
 ////        computeBenchMark(supplier, sortInput, listConsumer, "TimSort" + "- Randomly Ordered");
