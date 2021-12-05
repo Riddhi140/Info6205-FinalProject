@@ -77,7 +77,6 @@ public class BenchMarkAnalysis {
     private static void lsdSortAnalysis() {
         List<String> words = hindiWordsList("4MHindiWords.csv");
         for (int i = 1; i < 4; i++) {
-            words = hindiWordsList("4MHindiWords.csv");
             if (i > 1) {
                 words.addAll(Collections.unmodifiableList(words));
             }
