@@ -1,5 +1,7 @@
 package edu.neu.coe.info6205.sort;
 
+import edu.neu.coe.info6205.util.StdRandom;
+
 import static edu.neu.coe.info6205.util.Utilities.show;
 
 public class QuickDualPivot {
