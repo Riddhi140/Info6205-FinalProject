@@ -1,5 +1,8 @@
 package edu.neu.coe.info6205.util;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.Random;
@@ -83,7 +86,20 @@ public class Utilities {
     public static void show(Comparable[] a, String description) {
         System.out.println("Array output with " + description);
         for (int i = 0; i < a.length; i++) {
-            System.out.println(a[i]);
+            try {
+                System.out.println(a[i]);
+                writeFile(description + ".txt", String.valueOf(a[i]));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
+    }
+
+    public static void writeFile(String fileName, String str)
+            throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(fileName, true));
+        writer.append(str);
+        writer.append("\n");
+        writer.close();
     }
 }
